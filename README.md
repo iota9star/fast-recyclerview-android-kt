@@ -15,8 +15,9 @@ dependencies {
 ```
 
 ## Screenshot
-These are the screenshots of simple project.
-| ![single](https://raw.githubusercontent.com/iota9star/fast-recyclerview-kt/master/art/Screenshot_single.png "single") | ![multiple](https://raw.githubusercontent.com/iota9star/fast-recyclerview-kt/master/art/Screenshot_multiple.png "multiple") |
+These are the screenshots of simple project. 
+
+| ![single](https://github.com/iota9star/fast-recyclerview-android-kt/blob/master/art/Screenshot_single.png "single") | ![multiple](https://github.com/iota9star/fast-recyclerview-android-kt/blob/master/art/Screenshot_multiple.png "multiple") |
 | :------: | :------: |
 
 ## Use Case
