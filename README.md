@@ -10,12 +10,12 @@ The Gradle dependency is available via jCenter. Add this to your module's build.
 ``` gradle
 dependencies {
     // ... other dependencies
-    implementation 'io.nichijou:fastrecyclerview:0.0.2'
+    implementation 'io.nichijou:fastrecyclerview:0.0.3'
 }
 ```
 
 ## Screenshot
-These are the screenshots of simple project. 
+These are the screenshots of simple project.
 
 | ![single](https://github.com/iota9star/fast-recyclerview-android-kt/blob/master/art/Screenshot_single.png "single") | ![multiple](https://github.com/iota9star/fast-recyclerview-android-kt/blob/master/art/Screenshot_multiple.png "multiple") |
 | :------: | :------: |
@@ -23,14 +23,14 @@ These are the screenshots of simple project.
 ## Use Case
 #### Single ViewType
 ``` kotlin
-recycler_view.with(layoutResId, data) {// init data
+recycler_view.withLayout(layoutResId, data) {// init data
     // doSomething
 }
 ```
 
 #### Multiple ViewType
 ``` kotlin
-recycler_view.with(layoutResId1, viewTypeMatching) {
+recycler_view.withLayout(layoutResId1, viewTypeMatching) {
     // doSomething
 }.with(layoutResId2, viewTypeMatching) {
     // doSomething
@@ -39,7 +39,7 @@ recycler_view.with(layoutResId1, viewTypeMatching) {
 
 #### Add or Reset
 ``` kotlin
-recycler_view.addNew(newData, reset)
+recycler_view.addItem(newData, reset)
 ```
 #### Update
 ``` kotlin

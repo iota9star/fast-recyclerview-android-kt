@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import io.nichijou.fastrecyclerview.with
+import io.nichijou.fastrecyclerview.addItem
+import io.nichijou.fastrecyclerview.removeItemAt
+import io.nichijou.fastrecyclerview.withLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recyclerview.*
 import kotlinx.android.synthetic.main.item_type_one.view.*
@@ -62,28 +64,32 @@ class SingleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler_view.layoutManager = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
-        recycler_view.with(R.layout.item_type_two, Data.get()) {
+        recycler_view.withLayout(R.layout.item_type_two, Data.getMulti()) {
             tv_21.text = it.s1
         }
     }
 }
 
 class MultipleFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_recyclerview, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler_view.layoutManager = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
-        recycler_view.with(R.layout.item_type_one, Data.get(), { it.type == 0 }) {
+        recycler_view.withLayout(R.layout.item_type_one, Data.getMulti(), { it.type == 0 }) {
             tv_11.text = it.s1
             tv_12.text = it.s2
-        }.with(R.layout.item_type_two, { it.type == 1 }) {
+        }.withLayout(R.layout.item_type_two, { it.type == 1 }) {
             tv_21.text = it.s1
-        }.with(R.layout.item_type_three, { it.type == 2 }) {
+        }.withLayout(R.layout.item_type_three, { it.type == 2 }) {
             tv_31.text = it.s1
             iv_31.setImageResource(it.icon)
         }
+        recycler_view.addItem(Data.getSingle())
+        recycler_view.addItem(Data.getSingle(), 5)
+        recycler_view.removeItemAt(0)
     }
 }
 
@@ -93,15 +99,19 @@ class PagerAdapter(fm: FragmentManager, private val fragments: Array<Fragment>) 
 }
 
 object Data {
-    private const val str = "Cat ipsum dolor sit amet, claw your carpet in places everyone can see - why hide my amazing artistic clawing skills? yet vommit food and eat it again and stares at human while pushing stuff off a table for jumps off balcony gives owner dead mouse at present then poops in litter box snatches yarn and fights with dog cat chases laser then plays in grass finds tiny spot in cupboard and sleeps all day jumps in bathtub and meows when owner fills food dish the cat knocks over the food dish cat slides down the water slide and into pool and swims even though it does not like water. "
+    private const val str = "Cat ipsum dolor sit amet, claw your carpet in places everyone can see - why hide my amazing artistic clawing skills? yet vommit food and eat it again and stares at human while pushing stuff off a table for jumps off balcony gives owner dead mouse at present then poops in litter box snatches yarn and fights withLayout dog cat chases laser then plays in grass finds tiny spot in cupboard and sleeps all day jumps in bathtub and meows when owner fills food dish the cat knocks over the food dish cat slides down the water slide and into pool and swims even though it does not like water. "
     private val icons by lazy { arrayOf(R.drawable.ic_dashboard_black_24dp, R.drawable.ic_home_black_24dp) }
     private val random by lazy { Random() }
-    fun get(): ArrayList<D> {
-        val list = ArrayList<D>()
+    fun getMulti(): ArrayList<SimpleEntity> {
+        val list = ArrayList<SimpleEntity>()
         for (i in 0..200) {
-            list.add(D(random.nextInt(3), getString(), getString(), icons[random.nextInt(icons.size)]))
+            list.add(SimpleEntity(random.nextInt(3), getString(), getString(), icons[random.nextInt(icons.size)]))
         }
         return list
+    }
+
+    fun getSingle(): SimpleEntity {
+        return SimpleEntity(random.nextInt(3), getString(), getString(), icons[random.nextInt(icons.size)])
     }
 
     private fun getString(): String {
@@ -110,4 +120,4 @@ object Data {
     }
 }
 
-class D(val type: Int, val s1: String, val s2: String, val icon: Int)
+class SimpleEntity(val type: Int, val s1: String, val s2: String, val icon: Int)
