@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">fast-recycler-view</string>
-    <string name="label_single">Single</string>
-    <string name="label_multiple">Multiple</string>
+  <string name="app_name">fast-recycler-view</string>
+  <string name="label_single">Single</string>
+  <string name="label_multiple">Multiple</string>
 </resources>
